@@ -12,7 +12,7 @@ class DoubanSpiderSpider(scrapy.Spider):
     start_urls = ['https://movie.douban.com/top250']
 #默认解析方法
     def parse(self, response):
-        循环电影条目
+        #循环电影条目
         movie_list = response.xpath("//div[@class='article']//ol[@class='grid_view']/li")
 
         for i_item in movie_list:
@@ -29,7 +29,7 @@ class DoubanSpiderSpider(scrapy.Spider):
             douban_item['电影描述'] = i_item.xpath(".//p[@class='quote']//span//text()").extract_first()
             print(douban_item)
             yield douban_item
-            解析下一页规则
+            #解析下一页规则
         next_link = response.xpath("//span[@class='next']/link/@href").extract()
         if next_link:
             next_link = next_link[0]
